@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-	import { computed, ComputedRef, onMounted, ref, StyleValue } from 'vue';
+	import { computed, ComputedRef, onMounted, onUnmounted, ref, StyleValue } from 'vue';
 	import { TBoxElement } from '@/types/index';
 	import { ElementMovement } from '@/const';
 	import InputDefault from '@/components/UI/Inputs/InputDefault.vue';
@@ -50,7 +50,7 @@
 		rotateElement: 0
 	});
 	let isAnimation = false;
-	const animationSpeed = ref(1000);
+	const animationSpeed = ref(100);
 	const style: ComputedRef<StyleValue> = computed(() => {
 		return {
 			position: 'absolute',
@@ -132,6 +132,58 @@
 		}
 	};
 
+	const resizeHandler = (e) => {
+		const offetRight = window.innerWidth - boxElement.value!.offsetLeft - boxElementCharacter.value.width;
+
+		switch (true) {
+			case boxElement.value && boxElement.value?.offsetLeft <= offetRight && boxElement.value?.offsetLeft <= 0:
+				adjustmentLeftHandler();
+				break;
+
+			case boxElement.value && boxElement.value?.offsetLeft >= offetRight && offetRight <= 0:
+				adjustmentRightHandler();
+				break;
+		}
+	};
+
+	const adjustmentLeftHandler = () => {
+		boxElement.value!.animate(
+			[
+				{ left: `calc(50% - 50%)` },
+				{
+					left: `calc(50% - 50%)`
+				}
+			],
+			{
+				fill: 'forwards',
+				duration: 1,
+
+				iterations: 1
+			}
+		);
+
+		boxElementCharacter.value.shiftElementOfCenter = -((window.innerWidth - boxElement.value!.offsetLeft) / 2);
+	};
+
+	const adjustmentRightHandler = () => {
+		boxElement.value!.animate(
+			[
+				{ left: `calc(100% - ${boxElementCharacter.value.width}px)` },
+				{
+					left: `calc(100% - ${boxElementCharacter.value.width}px)`
+				}
+			],
+			{
+				fill: 'forwards',
+				duration: 1,
+
+				iterations: 1
+			}
+		);
+
+		boxElementCharacter.value.shiftElementOfCenter = window.innerWidth / 2 - boxElementCharacter.value.width;
+	};
+
 	onMounted(() => {
 		if (boxElement.value) {
 			boxElementCharacter.value = {
@@ -141,6 +193,12 @@
 				rotateElement: 0
 			};
 		}
+
+		window.addEventListener('resize', resizeHandler);
+	});
+
+	onUnmounted(() => {
+		window.removeEventListener('resize', resizeHandler);
 	});
 </script>
 
