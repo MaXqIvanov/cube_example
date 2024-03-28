@@ -132,7 +132,7 @@
 		}
 	};
 
-	const resizeHandler = (e) => {
+	const resizeHandler = () => {
 		const offetRight = window.innerWidth - boxElement.value!.offsetLeft - boxElementCharacter.value.width;
 
 		switch (true) {
