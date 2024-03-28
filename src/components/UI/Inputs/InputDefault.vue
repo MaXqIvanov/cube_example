@@ -1,11 +1,14 @@
 <template>
 	<div class="form-group">
-		<span>speed animation</span>
+		<span>speed animation (max 3000)</span>
 		<input
-			v-model="inputValue"
+			v-model.trim="inputValue"
 			class="form-field"
-			type="text"
+			:type="type"
 			placeholder=""
+			@keyup="keypressHandler"
+			:max="maxValue"
+			:min="minValue"
 		/>
 	</div>
 </template>
@@ -15,9 +18,14 @@
 
 	const props = withDefaults(
 		defineProps<{
-			input: string;
+			input: string | number;
+			type: 'text' | 'number';
+			maxValue?: number;
+			minValue?: number;
 		}>(),
-		{}
+		{
+			type: 'text'
+		}
 	);
 
 	const emits = defineEmits(['update:input']);
@@ -30,6 +38,15 @@
 			emits('update:input', value);
 		}
 	});
+
+	const keypressHandler = (e: KeyboardEvent) => {
+		if (props.type === 'number') {
+			const currentValue = (e.target as HTMLInputElement).value;
+			if (props.maxValue && Number(currentValue) > props.maxValue) {
+				inputValue.value = props.maxValue;
+			}
+		}
+	};
 </script>
 
 <style scoped lang="scss">

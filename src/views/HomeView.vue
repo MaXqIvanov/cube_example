@@ -23,6 +23,9 @@
 		<InputDefault
 			v-model:input="animationSpeed"
 			class="input__animation"
+			type="number"
+			:max-value="3000"
+			:min-value="0"
 		/>
 		<a
 			target="_blank"
@@ -47,7 +50,7 @@
 		rotateElement: 0
 	});
 	let isAnimation = false;
-	const animationSpeed = ref('1000');
+	const animationSpeed = ref(1000);
 	const style: ComputedRef<StyleValue> = computed(() => {
 		return {
 			position: 'absolute',
@@ -162,7 +165,7 @@
 				position: absolute;
 				top: 0px;
 				right: 0px;
-				max-width: 270px;
+				max-width: 320px;
 			}
 		}
 	}

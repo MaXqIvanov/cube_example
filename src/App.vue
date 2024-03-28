@@ -2,12 +2,6 @@
 	<RouterView />
 </template>
 
-<script setup lang="ts">
-	import { onMounted } from 'vue';
-
-	onMounted(() => {
-		console.log('cube_example');
-	});
-</script>
+<script setup lang="ts"></script>
 
 <style scoped lang="scss"></style>
