@@ -213,6 +213,10 @@
 		}
 
 		.btn-list {
+			position: absolute;
+			bottom: 20px;
+			left: 50%;
+			transform: translate(-50%, -50%);
 			display: flex;
 			gap: 12px;
 			margin-top: 10px;
