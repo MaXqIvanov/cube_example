@@ -30,8 +30,8 @@
 		<a
 			target="_blank"
 			href="https://github.com/MaXqIvanov/cube_example"
-			class="link__gitlab"
-			>gitlab</a
+			class="link__github"
+			>github</a
 		>
 	</section>
 </template>
@@ -228,7 +228,7 @@
 		}
 	}
 	.link {
-		&__gitlab {
+		&__github {
 			position: absolute;
 			right: 10px;
 			top: 50px;
