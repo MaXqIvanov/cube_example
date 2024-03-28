@@ -1,6 +1,6 @@
 <template>
 	<div class="form-group">
-		<span>speed animation (max 3000)</span>
+		<span>speed animation (max 3000ms)</span>
 		<input
 			v-model.trim="inputValue"
 			class="form-field"
