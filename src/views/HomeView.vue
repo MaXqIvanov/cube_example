@@ -50,7 +50,7 @@
 		rotateElement: 0
 	});
 	let isAnimation = false;
-	const animationSpeed = ref(100);
+	const animationSpeed = ref(1000);
 	const style: ComputedRef<StyleValue> = computed(() => {
 		return {
 			position: 'absolute',
