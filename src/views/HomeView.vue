@@ -227,7 +227,7 @@
 				position: absolute;
 				top: 0px;
 				right: 0px;
-				max-width: 320px;
+				max-width: 340px;
 			}
 		}
 	}
