@@ -42,8 +42,11 @@
 	const keypressHandler = (e: KeyboardEvent) => {
 		if (props.type === 'number') {
 			const currentValue = (e.target as HTMLInputElement).value;
-			if (props.maxValue && Number(currentValue) > props.maxValue) {
+
+			if (typeof props.maxValue === 'number' && Number(currentValue) > props.maxValue) {
 				inputValue.value = props.maxValue;
+			} else if (typeof props.minValue === 'number' && Number(currentValue) <= props.minValue) {
+				inputValue.value = props.minValue;
 			}
 		}
 	};
